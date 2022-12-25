@@ -1,3 +1,3 @@
 import MainLogo from './MainLogo';
-
-export { MainLogo };
+import FormRow from './FormRow';
+export { MainLogo, FormRow };
