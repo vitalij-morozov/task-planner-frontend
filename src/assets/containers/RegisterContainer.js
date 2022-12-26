@@ -10,7 +10,7 @@ const Container = styled.section`
     width: 15rem;
   }
   .form {
-    max-width: 400px;
+    max-width: 480px;
     border-top: 5px solid var(--primary-500);
     border-bottom: 5px solid var(--primary-500);
   }
