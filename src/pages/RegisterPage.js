@@ -13,6 +13,8 @@ const inialState = {
   password1: '',
   password2: '',
   isMember: true,
+  lastName: '',
+  image: '',
 };
 
 function RegisterPage() {
@@ -37,8 +39,8 @@ function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password1, password2, isMember } = values;
-    if (!email || !password1 || !password2 || (!isMember && !name)) {
+    const { name, email, password1, password2, isMember, lastName, image } = values;
+    if (!email || !password1 || (!isMember && !name) || (!isMember && !password2)) {
       toast.error('Please fill all fields');
       return;
     }
@@ -46,7 +48,15 @@ function RegisterPage() {
       dispatch(loginUser({ email: email, password: password1 }));
       return;
     }
-    dispatch(registerUser({ name: name, email: email, password1: password1, password2: password2, notes: [] }));
+    registerUser({
+      name: name,
+      email: email,
+      password1: password1,
+      password2: password2,
+      notes: [],
+      lastName,
+      image,
+    });
   };
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });

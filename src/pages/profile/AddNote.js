@@ -1,7 +1,12 @@
 import React from 'react';
+import { useState } from 'react';
 
 function AddNote() {
-  return <div>AddNote</div>;
+  const [text, setText] = useState(``);
+
+  const handleKeyDown = () => {};
+  console.log('text ===', text);
+  return <div></div>;
 }
 
 export default AddNote;

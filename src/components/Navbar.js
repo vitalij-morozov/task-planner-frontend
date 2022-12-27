@@ -2,16 +2,19 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from '../assets/containers/NavbarContainer';
 import MainLogo from './MainLogo';
-import { toggleSidebar } from '../features/user/userSlice';
+import { toggleSidebar, logoutUser } from '../features/user/userSlice';
 
 function Navbar() {
   const { user } = useSelector((store) => store.user);
-  const disppatch = useDispatch();
+  const dispatch = useDispatch();
 
   const toggle = () => {
-    disppatch(toggleSidebar());
+    dispatch(toggleSidebar());
   };
 
+  const logOut = () => {
+    dispatch(logoutUser());
+  };
   return (
     <Container>
       <div className='nav-center'>
@@ -21,11 +24,15 @@ function Navbar() {
         <div>
           <MainLogo />
           <h3 className='logo-text'>
-            <span>{user?.name} </span> Profile
+            {user?.image ? <img src={user.image} alt='profile avatar' className='user-avatar' /> : ''}
+            <span>
+              {user?.name} {user?.lastName}{' '}
+            </span>{' '}
+            Profile
           </h3>
         </div>
         <div className='btn-container'>
-          <button type='button' className='btn'>
+          <button type='button' className='btn' onClick={logOut}>
             Log Out
           </button>
         </div>

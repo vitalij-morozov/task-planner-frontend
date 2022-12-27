@@ -39,6 +39,12 @@ const Container = styled.nav`
     position: relative;
     box-shadow: var(--shadow-2);
   }
+  .user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--green-dark);
+  }
   .logo-text {
     display: none;
     margin: 0;

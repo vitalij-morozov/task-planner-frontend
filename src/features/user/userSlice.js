@@ -11,6 +11,7 @@ const initialState = {
 
 export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
   try {
+    console.log('user ===', user);
     const response = await fetch(`${baseURL}/tp/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -32,6 +33,20 @@ export const loginUser = createAsyncThunk('user/loginUser', async (user, thunkAP
     });
     const data = response.json();
 
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const updateUser = createAsyncThunk('user/updateUser', async (user, thunkAPI) => {
+  try {
+    const response = await fetch(`${baseURL}/tp/user/${initialState.user.secret}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user),
+    });
+    const data = response.json();
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -80,9 +95,25 @@ const userSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
+    [updateUser.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateUser.fulfilled]: (state, { payload }) => {
+      const { data } = payload;
+      console.log('data ===', data);
+      state.isLoading = false;
+      state.user = data.user;
+      addUserToLocalStorage(data.user);
+      toast.success(`Information Updated, ${data.user.name}!`);
+    },
+    [updateUser.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    },
   },
 });
 
+console.log('initialState.user ===', initialState.user);
 export const { toggleSidebar, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

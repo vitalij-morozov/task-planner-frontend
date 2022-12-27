@@ -3,6 +3,7 @@ import { FormRow } from '../../components';
 import Container from '../../assets/containers/ProfilePageContainer';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateUser } from '../../features/user/userSlice';
 
 function UserProfilePage() {
   const { isLoading, user } = useSelector((store) => store.user);
@@ -15,10 +16,14 @@ function UserProfilePage() {
     image: user?.image || '',
   });
   const handleSubmit = (e) => {
-    if (!userInfo.name || !userInfo.email) {
+    e.preventDefault();
+    const { name, email, lastName, image } = userInfo;
+    if (!name || !email) {
       toast.error('Fill out necessary (*) fields');
       return;
     }
+    console.log('userInfo ===', userInfo);
+    dispatch(updateUser({ name, email, lastName, image }));
   };
   const handleChange = (e) => {
     const name = e.target.name;
@@ -33,7 +38,8 @@ function UserProfilePage() {
           Here you can change your Profile Information. Fields that are marked with * cannot be empty
         </p>
         <div className='form-center'>
-          <FormRow type='text' name='name' value={userInfo.name} handleChange={handleChange} />
+          <FormRow type='text' labelText='name*' name='name' value={userInfo.name} handleChange={handleChange} />
+          <FormRow type='text' labelText='email*' name='email' value={userInfo.email} handleChange={handleChange} />
           <FormRow
             type='text'
             name='lastName'
@@ -41,8 +47,16 @@ function UserProfilePage() {
             value={userInfo.lastName}
             handleChange={handleChange}
           />
-          <FormRow type='text' name='email' value={userInfo.email} handleChange={handleChange} />
-          <FormRow type='text' name='image' value={userInfo.image} handleChange={handleChange} />
+          <FormRow
+            type='text'
+            labelText='profile picture'
+            name='image'
+            value={userInfo.image}
+            handleChange={handleChange}
+          />
+          <button type='submit' className='btn btn-block' disabled={isLoading}>
+            {isLoading ? 'Wait for changes...' : 'Save changes'}
+          </button>
         </div>
       </form>
     </Container>
