@@ -9,9 +9,12 @@ const Container = styled.aside`
       background: var(--white);
       min-height: 100vh;
       height: 100%;
-      width: 250px;
+      width: 350px;
       margin-left: -250px;
       transition: var(--transition);
+    }
+    .logo {
+      width: 15rem;
     }
     .content {
       position: sticky;

@@ -143,6 +143,9 @@ ul {
   display: block;
   object-fit: cover;
 }
+img.logo {
+  max-width: 15rem;
+}
 /* buttons */
 
 .btn {
