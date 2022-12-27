@@ -16,7 +16,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route index element={<AllNotes />} />
+          <Route index path='all-notes' element={<AllNotes />} />
           <Route path='add-note' element={<AddNote />} />
           <Route path='user-profile' element={<UserProfilePage />} />
           <Route path='stats' element={<StatsPage />} />

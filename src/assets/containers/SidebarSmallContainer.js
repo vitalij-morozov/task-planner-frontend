@@ -4,6 +4,9 @@ const Container = styled.aside`
   @media (min-width: 990px) {
     display: none;
   }
+  img {
+    width: 13rem;
+  }
   .sidebar-container {
     position: fixed;
     inset: 0;
@@ -52,6 +55,7 @@ const Container = styled.aside`
     padding: 1rem 0;
     text-transform: capitalize;
     transition: var(--transition);
+    font-size: 1.5rem;
   }
   .nav-link:hover {
     color: var(--grey-900);

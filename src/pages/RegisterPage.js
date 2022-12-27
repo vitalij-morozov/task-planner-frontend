@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const inialState = {
   name: '',
   email: '',
-  password: '',
+  password1: '',
   password2: '',
   isMember: true,
 };
@@ -20,7 +20,7 @@ function RegisterPage() {
   const { user, isLoading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const nav = useNavigate();
-
+  console.log('isMember ===', values.isMember);
   useEffect(() => {
     if (user) {
       setTimeout(() => {
@@ -30,22 +30,23 @@ function RegisterPage() {
   }, [user, nav]);
 
   const handleChange = (e) => {
-    const name = e.target.value;
+    const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, password2, isMember } = values;
-    if (!email || !password || !password2 || (!isMember && !name)) {
+    const { name, email, password1, password2, isMember } = values;
+    if (!email || !password1 || !password2 || (!isMember && !name)) {
       toast.error('Please fill all fields');
       return;
     }
     if (isMember) {
-      dispatch(loginUser({ email: email, password: password }));
+      dispatch(loginUser({ email: email, password: password1 }));
+      return;
     }
-    dispatch(registerUser({ name, email: email, password: password, password2: password2, notes: [] }));
+    dispatch(registerUser({ name: name, email: email, password1: password1, password2: password2, notes: [] }));
   };
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
@@ -55,23 +56,23 @@ function RegisterPage() {
     <Container className='full-page'>
       <form onSubmit={handleSubmit} className='form'>
         <MainLogo />
-        <h3>{!values.isMember ? 'Login' : 'Register'}</h3>
-        {values.isMember && (
+        <h3>{values.isMember ? 'Login' : 'Register'}</h3>
+        {!values.isMember && (
           <FormRow type='text' name='name' value={values.name} handleChange={handleChange} labelText='Name' />
         )}
         <FormRow type='email' name='email' value={values.email} handleChange={handleChange} labelText='Email' />
         <FormRow
           type='password'
-          name='password'
-          value={values.password}
+          name='password1'
+          value={values.password1}
           handleChange={handleChange}
           labelText='Password'
         />
-        {values.isMember && (
+        {!values.isMember && (
           <FormRow
-            type='passwordtwo'
-            name='passwordtwo'
-            value={values.password}
+            type='password'
+            name='password2'
+            value={values.password2}
             handleChange={handleChange}
             labelText='Repeat Password'
           />
@@ -80,9 +81,9 @@ function RegisterPage() {
           {isLoading ? 'Loading...' : 'Submit'}
         </button>
         <p>
-          {values.isMember ? 'Do not have an account yet?' : 'Already have an account?'}
+          {!values.isMember ? 'Do not have an account yet?' : 'Already have an account?'}
           <button type='button' onClick={toggleMember} className='member-btn'>
-            {values.isMember ? 'Login' : 'Register'}
+            {!values.isMember ? 'Login' : 'Register'}
           </button>
         </p>
       </form>

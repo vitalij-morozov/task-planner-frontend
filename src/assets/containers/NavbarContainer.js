@@ -6,7 +6,7 @@ const Container = styled.nav`
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.1);
-  background-color: var(--white);
+  background-color: #e8c4c4;
 
   .logo {
     display: flex;
@@ -42,6 +42,9 @@ const Container = styled.nav`
   .logo-text {
     display: none;
     margin: 0;
+    span {
+      color: #850000;
+    }
   }
   @media (min-width: 992px) {
     position: sticky;
