@@ -11,7 +11,6 @@ const initialState = {
 
 export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
   try {
-    console.log('user ===', user);
     const response = await fetch(`${baseURL}/tp/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
