@@ -5,4 +5,8 @@ import SidebarLarge from './SidebarLarge';
 import SidebarSmall from './SidebarSmall';
 import NavLinks from './NavLinks';
 import FormRowSelect from './FormRowSelect';
-export { MainLogo, FormRow, Navbar, SidebarLarge, SidebarSmall, NavLinks, FormRowSelect };
+import Notes from './Notes';
+import Search from './Search';
+import SingleNote from './SingleNote';
+
+export { MainLogo, FormRow, Navbar, SidebarLarge, SidebarSmall, NavLinks, FormRowSelect, Notes, Search, SingleNote };
