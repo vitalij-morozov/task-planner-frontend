@@ -1,8 +1,22 @@
 import Container from '../assets/containers/SingleNoteContainer';
 import { BiTask, BiNote } from 'react-icons/bi';
+import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import moment from 'moment/moment';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, createdAt }) {
+  console.log('dueDate ===', dueDate, Date.now());
+
+  const [noteStatus, setNoteStatus] = useState(status);
+
+  useEffect(() => {
+    if (dueDate > Date.now()) {
+      setNoteStatus('expired');
+    }
+  }, [dueDate]);
+
   return (
     <Container>
       <header>
@@ -14,17 +28,30 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
       </header>
       <div className='content'>
         <div className='content-center'>
-          <div className={`status ${status}`}>{status}</div>
-          <p className='text'>{noteText}</p>
+          {noteType === 'task' ? (
+            <div className='content-top'>
+              <div className={`status ${noteStatus}`}>{noteStatus}</div>
+              <p className='due-date'>
+                Due Date: <span className='date'>{dueDate}</span>
+              </p>
+            </div>
+          ) : (
+            <div className='content-top'></div>
+          )}
+
+          <p className='text' style={{ overflowY: noteText.length > 100 ? 'scroll' : 'hidden' }}>
+            {noteText}
+          </p>
         </div>
       </div>
       <footer>
+        <p className='created'>{moment(+createdAt).format('MMM Do YYYY, h:mm:ss')}</p>
         <div className='actions'>
-          <Link to='/add-note' className='edit-btn btn'>
-            Edit
+          <Link to='/add-note' className='edit-btn btn note-btn'>
+            Edit <MdOutlineModeEditOutline />
           </Link>
-          <button className='btn delete-btn' type='button'>
-            Delete
+          <button className='btn delete-btn note-btn' type='button'>
+            Delete <MdDeleteOutline />
           </button>
         </div>
       </footer>

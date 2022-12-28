@@ -11,7 +11,7 @@ const Container = styled.nav`
   .logo {
     display: flex;
     align-items: center;
-    width: 100px;
+    width: 160px;
   }
   .nav-center {
     display: flex;
@@ -22,7 +22,7 @@ const Container = styled.nav`
   .toggle-btn {
     background: transparent;
     border-color: transparent;
-    font-size: 1.75rem;
+    font-size: 2.3rem;
     color: var(--primary-500);
     cursor: pointer;
     display: flex;
@@ -55,7 +55,9 @@ const Container = styled.nav`
   @media (min-width: 992px) {
     position: sticky;
     top: 0;
-
+    .toggle-btn {
+      display: none;
+    }
     .nav-center {
       width: 90%;
     }
@@ -63,7 +65,9 @@ const Container = styled.nav`
       display: none;
     }
     .logo-text {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
     }
   }
 `;

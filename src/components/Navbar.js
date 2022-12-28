@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Container from '../assets/containers/NavbarContainer';
 import MainLogo from './MainLogo';
 import { toggleSidebar, logoutUser } from '../features/user/userSlice';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 function Navbar() {
   const { user } = useSelector((store) => store.user);
@@ -19,7 +20,7 @@ function Navbar() {
     <Container>
       <div className='nav-center'>
         <button type='button' className='toggle-btn' onClick={toggle}>
-          Toggle
+          <AiOutlineMenu />
         </button>
         <div>
           <MainLogo />

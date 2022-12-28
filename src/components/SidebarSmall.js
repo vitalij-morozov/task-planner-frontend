@@ -4,6 +4,7 @@ import MainLogo from './MainLogo';
 import { toggleSidebar } from '../features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import NavLinks from './NavLinks';
+import { GrClose } from 'react-icons/gr';
 
 function SidebarSmall() {
   const { isSidebarOpen } = useSelector((store) => store.user);
@@ -17,7 +18,7 @@ function SidebarSmall() {
       <div className={isSidebarOpen ? 'sidebar-container show-sidebar' : 'sidebar-container'}>
         <div className='content'>
           <button type='button' className='close-btn' onClick={toggle}>
-            ToggleX
+            <GrClose />
           </button>
           <header>
             <MainLogo />

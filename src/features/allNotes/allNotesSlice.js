@@ -31,7 +31,14 @@ export const getAllNotes = createAsyncThunk('/allNotes/getAllNotes', async (user
 const allNotesSlice = createSlice({
   name: 'allNotes',
   initialState,
-  reducers: {},
+  reducers: {
+    showLoading: (state) => {
+      state.isLoading = true;
+    },
+    hideLoading: (state) => {
+      state.isLoading = false;
+    },
+  },
   extraReducers: {
     [getAllNotes.pending]: (state) => {
       state.isLoading = true;
@@ -47,5 +54,5 @@ const allNotesSlice = createSlice({
   },
 });
 
+export const { showLoading, hideLoading } = allNotesSlice.actions;
 export default allNotesSlice.reducer;
-// export const { getAllNotes } = allNotesSlice.actions;

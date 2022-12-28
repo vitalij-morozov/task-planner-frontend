@@ -1,13 +1,12 @@
-import { IoBarChartSharp } from 'react-icons/io5';
-import { MdQueryStats } from 'react-icons/md';
-import { FaWpforms } from 'react-icons/fa';
-import { ImProfile } from 'react-icons/im';
+import { IoStatsChartOutline } from 'react-icons/io5';
+import { TfiUser } from 'react-icons/tfi';
+import { SlDocs, SlDoc } from 'react-icons/sl';
 
 const links = [
-  { id: 1, text: 'all notes', path: 'all-notes', icon: <MdQueryStats /> },
-  { id: 2, text: 'add note', path: 'add-note', icon: <FaWpforms /> },
-  { id: 3, text: 'profile', path: 'user-profile', icon: <ImProfile /> },
-  { id: 4, text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
+  { id: 1, text: 'all notes', path: 'all-notes', icon: <SlDocs /> },
+  { id: 2, text: 'add note', path: 'add-note', icon: <SlDoc /> },
+  { id: 3, text: 'profile', path: 'user-profile', icon: <TfiUser /> },
+  { id: 4, text: 'stats', path: 'stats', icon: <IoStatsChartOutline /> },
 ];
 
 export default links;
