@@ -10,7 +10,7 @@ const initialState = {
   noteTitle: '',
   noteText: '',
   dueDate: '',
-  statusOptions: ['in-progress', 'completed', 'failed', 'expired'],
+  statusOptions: ['in-progress', 'completed', 'failed'],
   status: 'in-progress',
   isEditing: false,
   editId: '',

@@ -4,9 +4,9 @@ import StatsCard from './StatsCard';
 
 function Stats({ stats }) {
   const statsCards = [
-    { title: 'Tasks In Progress', count: stats.progress, icon: '', name: 'progress' },
-    { title: 'Completed Tasks', count: stats.completed, icon: '', name: 'completed' },
-    { title: 'Failed Tasks', count: stats.failed, icon: '', name: 'failed' },
+    { title: 'Tasks In Progress', count: stats.progress, icon: '', color: '', background: '' },
+    { title: 'Completed Tasks', count: stats.completed, icon: '', color: '', background: '' },
+    { title: 'Failed Tasks', count: stats.failed, icon: '', color: '', background: '' },
   ];
 
   return (
