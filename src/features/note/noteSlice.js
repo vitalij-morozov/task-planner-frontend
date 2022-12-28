@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { baseURL } from '../../utils/fetch';
+import { showLoading, hideLoading, getAllNotes } from '../allNotes/allNotesSlice';
 
 const initialState = {
   isLoading: false,
@@ -12,6 +13,7 @@ const initialState = {
   statusOptions: ['in-progress', 'completed', 'failed', 'expired'],
   status: 'in-progress',
   isEditing: false,
+  editId: '',
   userId: '',
 };
 
@@ -29,6 +31,34 @@ export const createNote = createAsyncThunk('/note/createNote', async (note, thun
   }
 });
 
+export const removeNote = createAsyncThunk('/note/removeNote', async (ids, thunkAPI) => {
+  thunkAPI.dispatch(showLoading());
+  try {
+    const response = await fetch(`${baseURL}/tp/notes/${ids.noteId}`, {
+      method: 'DELETE',
+    });
+    thunkAPI.dispatch(getAllNotes(ids.userId));
+    return await response.json();
+  } catch (error) {
+    thunkAPI.dispatch(hideLoading());
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const updateNote = createAsyncThunk('/note/updateNote', async (ids, thunkAPI) => {
+  thunkAPI.dispatch(showLoading());
+  try {
+    const response = await fetch(`${baseURL}/tp/notes/${ids.noteId}`, {
+      method: 'DELETE',
+    });
+    thunkAPI.dispatch(getAllNotes(ids.userId));
+    return await response.json();
+  } catch (error) {
+    thunkAPI.dispatch(hideLoading());
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 const noteSlice = createSlice({
   name: 'note',
   initialState,
@@ -38,6 +68,9 @@ const noteSlice = createSlice({
     },
     clearValues: () => {
       return initialState;
+    },
+    setNoteUpdate: (state, { payload }) => {
+      return { ...state, isEditing: true, ...payload };
     },
   },
   extraReducers: {
@@ -52,8 +85,14 @@ const noteSlice = createSlice({
       state.isLoading = false;
       toast.error('Failed to create Note');
     },
+    [removeNote.fulfilled]: (state, { payload }) => {
+      toast.success('Note Removed', payload);
+    },
+    [removeNote.rejected]: (state, { payload }) => {
+      toast.error('Note Removal Failed', payload);
+    },
   },
 });
 
-export const { handleChange, clearValues } = noteSlice.actions;
+export const { handleChange, clearValues, setNoteUpdate } = noteSlice.actions;
 export default noteSlice.reducer;

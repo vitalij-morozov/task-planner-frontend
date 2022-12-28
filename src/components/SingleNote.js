@@ -1,14 +1,17 @@
 import Container from '../assets/containers/SingleNoteContainer';
 import { BiTask, BiNote } from 'react-icons/bi';
-import { MdDeleteOutline, MdOutlineModeEditOutline } from 'react-icons/md';
+import { MdDeleteOutline, MdOutlineModeEditOutline, MdDateRange } from 'react-icons/md';
+import { AiOutlineCalendar } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import moment from 'moment/moment';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { removeNote, setNoteUpdate } from '../features/note/noteSlice';
+import { useDispatch } from 'react-redux';
 
-function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, createdAt }) {
+function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, createdAt, userId }) {
   console.log('dueDate ===', dueDate, Date.now());
-
+  const dispatch = useDispatch();
   const [noteStatus, setNoteStatus] = useState(status);
 
   useEffect(() => {
@@ -16,6 +19,11 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
       setNoteStatus('expired');
     }
   }, [dueDate]);
+
+  const ids = {
+    noteId: _id,
+    userId: userId,
+  };
 
   return (
     <Container>
@@ -32,7 +40,10 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
             <div className='content-top'>
               <div className={`status ${noteStatus}`}>{noteStatus}</div>
               <p className='due-date'>
-                Due Date: <span className='date'>{dueDate}</span>
+                Due Date:{' '}
+                <span className='date'>
+                  <AiOutlineCalendar /> {dueDate}
+                </span>
               </p>
             </div>
           ) : (
@@ -45,12 +56,18 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
         </div>
       </div>
       <footer>
-        <p className='created'>{moment(+createdAt).format('MMM Do YYYY, h:mm:ss')}</p>
+        <p className='created'>
+          <MdDateRange /> {moment(+createdAt).format('MMM Do YYYY, h:mm:ss')}
+        </p>
         <div className='actions'>
-          <Link to='/add-note' className='edit-btn btn note-btn'>
+          <Link
+            to='/add-note'
+            className='edit-btn btn note-btn'
+            onClick={() => dispatch(setNoteUpdate({ editId: _id, noteTitle, noteText, status }))}
+          >
             Edit <MdOutlineModeEditOutline />
           </Link>
-          <button className='btn delete-btn note-btn' type='button'>
+          <button className='btn delete-btn note-btn' type='button' onClick={() => dispatch(removeNote(ids))}>
             Delete <MdDeleteOutline />
           </button>
         </div>

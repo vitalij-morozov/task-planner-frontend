@@ -87,6 +87,18 @@ const Container = styled.div`
     width: 100px;
     height: 30px;
   }
+  .due-date {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .date {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    gap: 0.2rem;
+    font-weight: 600;
+    color: var(--primary-700);
+  }
   footer {
     margin-top: 1rem;
     display: flex;
@@ -97,6 +109,13 @@ const Container = styled.div`
     p {
       margin: 0;
     }
+  }
+  .created {
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--grey-800);
   }
   .actions {
     display: flex;
