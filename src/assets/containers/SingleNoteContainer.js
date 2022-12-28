@@ -6,6 +6,7 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
+  position: relative;
   .note-btn {
     svg {
       font-size: 1rem;

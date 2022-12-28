@@ -8,12 +8,12 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { removeNote, setNoteUpdate } from '../features/note/noteSlice';
 import { useDispatch } from 'react-redux';
+import EditForm from './EditForm';
 
 function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, createdAt, userId }) {
-  console.log('dueDate ===', dueDate, Date.now());
   const dispatch = useDispatch();
   const [noteStatus, setNoteStatus] = useState(status);
-
+  const [showEdit, setShowEdit] = useState(false);
   useEffect(() => {
     if (dueDate > Date.now()) {
       setNoteStatus('expired');
@@ -27,6 +27,7 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
 
   return (
     <Container>
+      {showEdit && <EditForm setShowEdit={setShowEdit} />}
       <header>
         <div className='top'>
           <div className='main-icon'>{noteType === 'task' ? <BiTask /> : <BiNote />}</div>
@@ -57,16 +58,12 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
       </div>
       <footer>
         <p className='created'>
-          <MdDateRange /> {moment(+createdAt).format('MMM Do YYYY, h:mm:ss')}
+          <MdDateRange /> {moment(+createdAt).format('MMM Do YYYY')}
         </p>
         <div className='actions'>
-          <Link
-            to='/add-note'
-            className='edit-btn btn note-btn'
-            onClick={() => dispatch(setNoteUpdate({ editId: _id, noteTitle, noteText, status }))}
-          >
+          <button type='button' className='edit-btn btn note-btn' onClick={() => setShowEdit(true)}>
             Edit <MdOutlineModeEditOutline />
-          </Link>
+          </button>
           <button className='btn delete-btn note-btn' type='button' onClick={() => dispatch(removeNote(ids))}>
             Delete <MdDeleteOutline />
           </button>

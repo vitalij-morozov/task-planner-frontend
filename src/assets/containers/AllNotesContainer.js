@@ -13,10 +13,10 @@ const Container = styled.section`
     grid-template-columns: 1fr;
     row-gap: 2rem;
   }
-  @media (min-width: 992px) {
+  @media (min-width: 1124px) {
     .notes {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
   }
