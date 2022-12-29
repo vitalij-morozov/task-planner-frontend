@@ -6,9 +6,9 @@ import Loading from '../../components/Loading';
 function StatsPage() {
   const { notes } = useSelector((state) => state.allNotes);
   const stats = {
-    progress: notes.filter((note) => note.status === 'in-progress').length,
-    completed: notes.filter((note) => note.status === 'completed').length,
-    failed: notes.filter((note) => note.status === 'failed').length,
+    progress: notes.filter((note) => note.status === 'in-progress' && note.noteType === 'task').length,
+    completed: notes.filter((note) => note.status === 'completed' && note.noteType === 'task').length,
+    failed: notes.filter((note) => note.status === 'failed' && note.noteType === 'task').length,
   };
   const { isLoading } = useSelector((state) => state.allNotes);
   const dispatch = useDispatch();

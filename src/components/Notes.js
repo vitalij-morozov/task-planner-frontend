@@ -4,8 +4,9 @@ import Container from '../assets/containers/AllNotesContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from './Loading';
 import { getAllNotes } from '../features/allNotes/allNotesSlice';
+import PaginationBtns from './PaginationBtns';
 function Notes() {
-  const { notes, isLoading } = useSelector((store) => store.allNotes);
+  const { notes, isLoading, page, totalNotes, pageAmount } = useSelector((store) => store.allNotes);
   const { user } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
@@ -27,11 +28,15 @@ function Notes() {
 
   return (
     <Container>
+      <h5>
+        {totalNotes} note{notes.length > 1 && 's'} found
+      </h5>
       <div className='notes'>
         {notes.map((note) => (
           <SingleNote key={note._id} {...note} />
         ))}
       </div>
+      {pageAmount > 1 && <PaginationBtns />}
     </Container>
   );
 }

@@ -15,6 +15,7 @@ const initialState = {
   notes: [],
   totalNotes: 0,
   pageAmount: 1,
+  page: 1,
   stats: {},
   ...initialFilterState,
 };
@@ -38,6 +39,16 @@ const allNotesSlice = createSlice({
     hideLoading: (state) => {
       state.isLoading = false;
     },
+    handleChange: (state, { payload: { name, value } }) => {
+      state.page = 1;
+      state[name] = value;
+    },
+    clearFilters: (state) => {
+      return { ...state, ...initialState };
+    },
+    changePage: (state, { payload }) => {
+      state.page = payload;
+    },
   },
   extraReducers: {
     [getAllNotes.pending]: (state) => {
@@ -45,7 +56,10 @@ const allNotesSlice = createSlice({
     },
     [getAllNotes.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
+      state.page = 1;
       state.notes = payload.data.notes;
+      state.pageAmount = Math.ceil(payload.data.notes.length / 10);
+      state.totalNotes = payload.data.notes.length;
     },
     [getAllNotes.rejected]: (state, { payload }) => {
       state.isLoading = false;
@@ -54,5 +68,5 @@ const allNotesSlice = createSlice({
   },
 });
 
-export const { showLoading, hideLoading } = allNotesSlice.actions;
+export const { showLoading, hideLoading, handleChange, clearFilters, changePage } = allNotesSlice.actions;
 export default allNotesSlice.reducer;
