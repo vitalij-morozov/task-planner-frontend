@@ -4,8 +4,8 @@ import { baseURL } from '../../utils/fetch';
 
 const initialFilterState = {
   search: '',
-  searchStatus: 'all',
-  searchType: 'all',
+  searchStatus: 'in-progress',
+  searchType: 'note',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 };
@@ -22,7 +22,13 @@ const initialState = {
 
 export const getAllNotes = createAsyncThunk('/allNotes/getAllNotes', async (userId, thunkAPI) => {
   try {
-    const response = await fetch(`${baseURL}/tp/notes/${userId}`);
+    const { searchType, search, searchStatus, sort } = thunkAPI.getState().allNotes;
+    console.log('search ===', search);
+    let url = `${baseURL}/tp/notes/${userId}?noteType=${searchType}&noteStatus=${searchStatus}&sort=${sort}&page=${initialState.page}`;
+    if (search) {
+      url += `&search=${search}`;
+    }
+    const response = await fetch(url);
     return await response.json();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -55,6 +61,7 @@ const allNotesSlice = createSlice({
       state.isLoading = true;
     },
     [getAllNotes.fulfilled]: (state, { payload }) => {
+      console.log('payload ===', payload);
       state.isLoading = false;
       state.page = 1;
       state.notes = payload.data.notes;

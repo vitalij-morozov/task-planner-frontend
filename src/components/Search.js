@@ -12,13 +12,13 @@ function Search() {
 
   const handleSearch = (e) => {
     if (isLoading) return;
-    dispatch(handleChange({ name: e.target.value, value: e.target.value }));
+    dispatch(handleChange({ name: e.target.name, value: e.target.value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(clearFilters());
   };
-
+  console.log('search ===', search);
   return (
     <Container>
       <form className='form'>
@@ -30,14 +30,14 @@ function Search() {
             name='searchType'
             value={searchType}
             handleChange={handleSearch}
-            list={['all', ...noteTypeOptions]}
+            list={noteTypeOptions}
           />
           <FormRowSelect
             labelText='status'
             name='searchStatus'
             value={searchStatus}
             handleChange={handleSearch}
-            list={['all', ...statusOptions]}
+            list={statusOptions}
           />
 
           <FormRowSelect name='sort' value={sort} handleChange={handleSearch} list={sortOptions} />

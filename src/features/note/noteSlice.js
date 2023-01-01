@@ -12,7 +12,6 @@ const initialState = {
   dueDate: '',
   statusOptions: ['in-progress', 'completed', 'failed'],
   status: 'in-progress',
-  isEditing: false,
   editId: '',
   userId: '',
 };
@@ -45,13 +44,15 @@ export const removeNote = createAsyncThunk('/note/removeNote', async (ids, thunk
   }
 });
 
-export const updateNote = createAsyncThunk('/note/updateNote', async (ids, thunkAPI) => {
+export const updateNote = createAsyncThunk('/note/updateNote', async (updateData, thunkAPI) => {
   thunkAPI.dispatch(showLoading());
   try {
-    const response = await fetch(`${baseURL}/tp/notes/${ids.noteId}`, {
-      method: 'DELETE',
+    const response = await fetch(`${baseURL}/tp/notes/${updateData.noteId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updateData),
     });
-    thunkAPI.dispatch(getAllNotes(ids.userId));
+    thunkAPI.dispatch(getAllNotes(updateData.userId));
     return await response.json();
   } catch (error) {
     thunkAPI.dispatch(hideLoading());
@@ -70,7 +71,7 @@ const noteSlice = createSlice({
       return initialState;
     },
     setNoteUpdate: (state, { payload }) => {
-      return { ...state, isEditing: true, ...payload };
+      return { ...state, ...payload };
     },
   },
   extraReducers: {

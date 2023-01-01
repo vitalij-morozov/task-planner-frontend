@@ -27,7 +27,7 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
 
   return (
     <Container>
-      {showEdit && <EditForm setShowEdit={setShowEdit} />}
+      {showEdit && <EditForm setShowEdit={setShowEdit} id={_id} title={noteTitle} text={noteText} status={status} />}
       <header>
         <div className='top'>
           <div className='main-icon'>{noteType === 'task' ? <BiTask /> : <BiNote />}</div>
