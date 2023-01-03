@@ -23,7 +23,7 @@ function UserProfilePage() {
       return;
     }
     console.log('userInfo ===', userInfo);
-    dispatch(updateUser({ name, email, lastName, image }));
+    dispatch(updateUser({ id: user.secret, name, email, lastName, image }));
   };
   const handleChange = (e) => {
     const name = e.target.name;

@@ -22,7 +22,6 @@ function RegisterPage() {
   const { user, isLoading } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const nav = useNavigate();
-  console.log('isMember ===', values.isMember);
   useEffect(() => {
     if (user) {
       setTimeout(() => {
@@ -48,15 +47,17 @@ function RegisterPage() {
       dispatch(loginUser({ email: email, password: password1 }));
       return;
     }
-    registerUser({
-      name: name,
-      email: email,
-      password1: password1,
-      password2: password2,
-      notes: [],
-      lastName,
-      image,
-    });
+    dispatch(
+      registerUser({
+        name: name,
+        email: email,
+        password1: password1,
+        password2: password2,
+        notes: [],
+        lastName,
+        image,
+      })
+    );
   };
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });

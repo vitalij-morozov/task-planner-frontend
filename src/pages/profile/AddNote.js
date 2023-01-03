@@ -81,7 +81,14 @@ function AddNote() {
             />
           )}
           <div className='btn-container'>
-            <button type='button' className='btn btn-block clear-btn' onClick={clearValues}>
+            <button
+              type='button'
+              className='btn btn-block clear-btn'
+              onClick={() => {
+                dispatch(clearValues());
+                setText('');
+              }}
+            >
               clear
             </button>
             <button type='submit' className='btn btn-block submit-btn' disabled={isLoading} onClick={handleSubmit}>

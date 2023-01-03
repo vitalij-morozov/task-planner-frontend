@@ -27,7 +27,7 @@ function Notes() {
       </Container>
     );
   }
-
+  console.log('notes ===', notes);
   return (
     <Container>
       <h5>

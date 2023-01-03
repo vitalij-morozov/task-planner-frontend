@@ -11,6 +11,7 @@ const initialState = {
 
 export const registerUser = createAsyncThunk('user/registerUser', async (user, thunkAPI) => {
   try {
+    console.log('user ===', user);
     const response = await fetch(`${baseURL}/tp/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -40,7 +41,7 @@ export const loginUser = createAsyncThunk('user/loginUser', async (user, thunkAP
 
 export const updateUser = createAsyncThunk('user/updateUser', async (user, thunkAPI) => {
   try {
-    const response = await fetch(`${baseURL}/tp/user/${initialState.user.secret}`, {
+    const response = await fetch(`${baseURL}/tp/user/${user.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
