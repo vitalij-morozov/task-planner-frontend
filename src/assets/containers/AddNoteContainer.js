@@ -39,7 +39,7 @@ const Container = styled.section`
     grid-template-columns: 1fr 1fr;
     column-gap: 1rem;
     align-self: flex-end;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     button {
       height: 35px;
     }
@@ -57,7 +57,7 @@ const Container = styled.section`
       column-gap: 1rem;
     }
     .btn-container {
-      margin-top: 0;
+      margin-top: 1rem;
     }
   }
   @media (min-width: 1120px) {

@@ -105,7 +105,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1.5rem 1rem;
+    padding: 0 1.5rem 1.7rem;
 
     p {
       margin: 0;

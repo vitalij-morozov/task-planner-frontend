@@ -9,6 +9,7 @@ function PaginationBtns() {
   const pages = Array.from({ length: pageAmount }, (_, index) => {
     return index + 1;
   });
+  console.log('page ===', page);
   console.log('pageAmount ===', pageAmount);
   const prevPage = () => {
     let newPage = page - 1;

@@ -25,7 +25,7 @@ function RegisterPage() {
   useEffect(() => {
     if (user) {
       setTimeout(() => {
-        nav('/');
+        nav('/all-notes');
       }, 2500);
     }
   }, [user, nav]);

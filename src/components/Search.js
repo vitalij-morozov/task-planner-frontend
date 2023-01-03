@@ -14,11 +14,12 @@ function Search() {
     if (isLoading) return;
     dispatch(handleChange({ name: e.target.name, value: e.target.value }));
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(clearFilters());
   };
-  console.log('search ===', search);
+
   return (
     <Container>
       <form className='form'>

@@ -22,9 +22,9 @@ const initialState = {
 
 export const getAllNotes = createAsyncThunk('/allNotes/getAllNotes', async (userId, thunkAPI) => {
   try {
-    const { searchType, search, searchStatus, sort } = thunkAPI.getState().allNotes;
+    const { searchType, search, searchStatus, sort, page } = thunkAPI.getState().allNotes;
     console.log('search ===', search);
-    let url = `${baseURL}/tp/notes/${userId}?noteType=${searchType}&noteStatus=${searchStatus}&sort=${sort}&page=${initialState.page}`;
+    let url = `${baseURL}/tp/notes/${userId}?noteType=${searchType}&noteStatus=${searchStatus}&sort=${sort}&page=${page}`;
     if (search) {
       url += `&search=${search}`;
     }
@@ -53,6 +53,7 @@ const allNotesSlice = createSlice({
       return { ...state, ...initialState };
     },
     changePage: (state, { payload }) => {
+      console.log('payload ===', payload);
       state.page = payload;
     },
   },
@@ -61,12 +62,11 @@ const allNotesSlice = createSlice({
       state.isLoading = true;
     },
     [getAllNotes.fulfilled]: (state, { payload }) => {
-      console.log('payload ===', payload);
       state.isLoading = false;
       state.page = 1;
       state.notes = payload.data.notes;
-      state.pageAmount = Math.ceil(payload.data.notes.length / 10);
-      state.totalNotes = payload.data.notes.length;
+      state.pageAmount = Math.ceil(payload.data.noteAmount / 10);
+      state.totalNotes = payload.data.noteAmount;
     },
     [getAllNotes.rejected]: (state, { payload }) => {
       state.isLoading = false;

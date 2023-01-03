@@ -64,10 +64,10 @@ function EditForm({ status, setShowEdit, id, title, text, type, uId }) {
         </div>
       )}
       <div className='buttons'>
-        <button type='submit' className='btn'>
+        <button type='submit' className='btn edit-btn confirm'>
           Confirm Changes
         </button>
-        <button type='button' className='btn' onClick={() => setShowEdit(false)}>
+        <button type='button' className='btn edit-btn cancel' onClick={() => setShowEdit(false)}>
           Cancel
         </button>
       </div>

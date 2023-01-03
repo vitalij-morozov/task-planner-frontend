@@ -4,6 +4,8 @@ const Container = styled.section`
   .form {
     width: 100%;
     max-width: 100%;
+    margin: 0;
+    margin-bottom: 2.5rem;
   }
   .form-input,
   .form-select,
