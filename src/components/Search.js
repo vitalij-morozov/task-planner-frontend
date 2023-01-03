@@ -30,7 +30,7 @@ function Search() {
             name='searchType'
             value={searchType}
             handleChange={handleSearch}
-            list={noteTypeOptions}
+            list={['all', ...noteTypeOptions]}
           />
           <FormRowSelect
             labelText='status'

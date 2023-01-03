@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 const Container = styled.section`
   .textarea {
-    height: 10rem;
+    height: 7rem;
     resize: none;
     width: 100%;
   }
   border-radius: var(--borderRadius);
   width: 100%;
   background: var(--white);
-  padding: 3rem 2rem 4rem;
+  padding: 3rem 4rem 4rem;
   box-shadow: var(--shadow-2);
   h3 {
     margin-top: 0;
@@ -62,7 +62,7 @@ const Container = styled.section`
   }
   @media (min-width: 1120px) {
     .form-center {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr;
     }
     .form-center button {
       margin-top: 0;
