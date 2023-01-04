@@ -97,6 +97,7 @@ function RegisterPage() {
             {!values.isMember ? 'Login' : 'Register'}
           </button>
         </p>
+        <p className='test-info'>test user: email: test@mail.com; password: 123456</p>
       </form>
     </Container>
   );

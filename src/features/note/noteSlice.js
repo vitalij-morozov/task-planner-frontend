@@ -92,6 +92,17 @@ const noteSlice = createSlice({
     [removeNote.rejected]: (state, { payload }) => {
       toast.error('Note Removal Failed', payload);
     },
+    [updateNote.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [updateNote.fulfilled]: (state) => {
+      state.isLoading = false;
+      toast.success('Note Updated!');
+    },
+    [updateNote.rejected]: (state) => {
+      state.isLoading = false;
+      toast.error('Failed to create Note');
+    },
   },
 });
 

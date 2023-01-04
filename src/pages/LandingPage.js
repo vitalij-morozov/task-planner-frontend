@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import mainImage from '../assets/main2.png';
 import Container from '../assets/containers/LandingContainer';
 import { MainLogo } from '../components';
+
 function LandingPage() {
   return (
     <Container>

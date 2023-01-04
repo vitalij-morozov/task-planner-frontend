@@ -4,19 +4,16 @@ import Container from '../assets/containers/AllNotesContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from './Loading';
 import { getAllNotes } from '../features/allNotes/allNotesSlice';
-import PaginationBtns from './PaginationBtns';
 
 function Notes() {
-  const { notes, isLoading, page, pageAmount, searchType, search, searchStatus, sort } = useSelector(
-    (store) => store.allNotes
-  );
+  const { notes, isLoading, searchType, search, searchStatus, sort } = useSelector((store) => store.allNotes);
   const { user } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllNotes(user._id));
-  }, [dispatch, user._id, searchType, search, searchStatus, sort, page]);
+  }, [dispatch, user._id, searchType, search, searchStatus, sort]);
 
   if (isLoading) {
     return <Loading />;
@@ -28,7 +25,7 @@ function Notes() {
       </Container>
     );
   }
-  console.log('notes ===', notes);
+
   return (
     <Container>
       <div className='notes'>
@@ -36,7 +33,6 @@ function Notes() {
           <SingleNote key={note._id} {...note} />
         ))}
       </div>
-      {pageAmount > 1 && <PaginationBtns />}
     </Container>
   );
 }

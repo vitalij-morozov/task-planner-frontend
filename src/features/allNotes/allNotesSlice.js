@@ -14,8 +14,6 @@ const initialState = {
   isLoading: false,
   notes: [],
   totalNotes: 0,
-  pageAmount: 1,
-  page: 1,
   stats: {},
   ...initialFilterState,
 };
@@ -65,7 +63,6 @@ const allNotesSlice = createSlice({
       state.isLoading = false;
       state.page = 1;
       state.notes = payload.data.notes;
-      state.pageAmount = Math.ceil(payload.data.noteAmount / 10);
       state.totalNotes = payload.data.noteAmount;
     },
     [getAllNotes.rejected]: (state, { payload }) => {

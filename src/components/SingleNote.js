@@ -2,11 +2,10 @@ import Container from '../assets/containers/SingleNoteContainer';
 import { BiTask, BiNote } from 'react-icons/bi';
 import { MdDeleteOutline, MdOutlineModeEditOutline, MdDateRange } from 'react-icons/md';
 import { AiOutlineCalendar } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 import moment from 'moment/moment';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { removeNote, setNoteUpdate } from '../features/note/noteSlice';
+import { removeNote} from '../features/note/noteSlice';
 import { useDispatch } from 'react-redux';
 import EditForm from './EditForm';
 
@@ -14,6 +13,7 @@ function SingleNote({ _id, noteTitle, noteText, noteType, dueDate, status, creat
   const dispatch = useDispatch();
   const [noteStatus, setNoteStatus] = useState(status);
   const [showEdit, setShowEdit] = useState(false);
+  
   useEffect(() => {
     if (dueDate > Date.now()) {
       setNoteStatus('expired');
