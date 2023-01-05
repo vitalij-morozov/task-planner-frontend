@@ -73,6 +73,10 @@ const userSlice = createSlice({
     [registerUser.fulfilled]: (state, { payload }) => {
       const { data } = payload;
       state.isLoading = false;
+      if (payload.error) {
+        toast.error('Auth error. Please check your credentials');
+        return;
+      }
       state.user = data.user;
       addUserToLocalStorage(data.user);
       toast.success(`Welcome, ${data.user?.name}`);
@@ -87,6 +91,10 @@ const userSlice = createSlice({
     [loginUser.fulfilled]: (state, { payload }) => {
       const { data } = payload;
       state.isLoading = false;
+      if (payload.error) {
+        toast.error('Auth error. Please check your credentials');
+        return;
+      }
       state.user = data.user;
       addUserToLocalStorage(data.user);
       toast.success(`Welcome Back, ${data.user.name}!`);
